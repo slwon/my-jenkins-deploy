@@ -1,7 +1,7 @@
 pipeline{
    agent { node { label 'master' } }
    parameters {
-       string(name: 'WF_PROCESS_INSTANCE_ID', defaultValue: '', description: '')
+       string(name: 'WF_PROCESS_INSTANCE_ID', defaultValue: '', description: 'Camunda Process Instance ID')
    } // End parameters
     stages {
         stage('Create RFC') {
