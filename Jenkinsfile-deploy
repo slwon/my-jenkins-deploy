@@ -8,15 +8,21 @@ pipeline{
             steps {
                 script {
                     echo("Camunda Process Instance: $WF_PROCESS_INSTANCE_ID")
-                    currentBuild.description =  "[RUNNING] processInstanceId:${WF_PROCESS_INSTANCE_ID}"
+                    currentBuild.description =  "processInstanceId:${WF_PROCESS_INSTANCE_ID}"
                 } // End script
             } // End steps
         } // End stage
         stage('Create RFC') {steps {script {echo("dummy stage")}}}
         stage ('Deploy Phase 1'){
             parallel {
-                stage ('Keystores'){steps {script {throw new Exception("Throw to stop pipeline")
-                echo("dummy stage")}}}
+                stage ('Keystores'){
+                    steps {
+                        script {
+                            echo("dummy stage")
+                            // throw new Exception("Simulate pipeline failure")
+                        }
+                    }
+                }
                 stage ('Aliases'){steps {script {echo("dummy stage")}}}
                 stage ('Caches'){steps {script {echo("dummy stage")}}}
                 stage ('Kvms'){steps {script {echo("dummy stage")}}}
