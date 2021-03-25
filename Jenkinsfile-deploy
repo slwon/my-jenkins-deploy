@@ -1,6 +1,7 @@
 pipeline{
 
     stages {
+
         stage('Create RFC') {
             steps {
                 script {
@@ -119,7 +120,6 @@ pipeline{
         failure {
             script {
                 log.info("Simulation only")
-                }
             } // End script
         } // End failure
         success {
