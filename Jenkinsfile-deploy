@@ -7,7 +7,7 @@ pipeline{
         stage('Create RFC') {
             steps {
                 script {
-                    echo("Simulation only")
+                    echo("Simulation only $WF_PROCESS_INSTANCE_ID")
                 } // End script
             } // End steps
         } // End stage
