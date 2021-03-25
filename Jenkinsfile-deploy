@@ -47,7 +47,7 @@ pipeline{
                 // currentBuild.displayName = "#${_buildNumber} - ${_gitRepo} (${_gitRefName})"
                 // currentBuild.description =  "(${_user}) ${_commitIdShort} | ${_triggeredBy} | ${_gitRepo} | ${_gitRefName} | ${_commitMsg}"
                 currentBuild.displayName = "#${env.BUILD_NUMBER}"
-                currentBuild.description =  "processInstanceId:${WF_PROCESS_INSTANCE_ID} currentBuildResult:${currentBuild.currentResult}"
+                currentBuild.description =  "${currentBuild.currentResult} processInstanceId:${WF_PROCESS_INSTANCE_ID}"
             }
         }
         failure {
