@@ -1,7 +1,7 @@
 pipeline{
    agent { node { label 'master' } }
    parameters {
-       string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '')
+       string(name: 'WF_PROCESS_INSTANCE_ID', defaultValue: '', description: '')
    } // End parameters
     stages {
         stage('Create RFC') {
