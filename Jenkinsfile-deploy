@@ -52,12 +52,12 @@ pipeline{
         }
         failure {
             script {
-                echo("Simulation only")
+                echo("Fail Simulation")
             } // End script
         } // End failure
         success {
             script {
-                echo("Simulation only")
+                echo("Success Simulation")
             } // End script
         } // End success
         cleanup {deleteDir()}// Clean workspace
