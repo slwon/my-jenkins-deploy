@@ -1,5 +1,8 @@
 pipeline{
-    agent { node { label 'master' } }
+   agent { node { label 'master' } }
+   parameters {
+       string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '')
+   } // End parameters
     stages {
         stage('Create RFC') {
             steps {
