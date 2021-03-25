@@ -1,0 +1,134 @@
+pipeline{
+
+    stages {
+        stage('Create RFC') {
+            steps {
+                script {
+                    log.info("Simulation only")
+                } // End script
+            } // End steps
+        } // End stage
+
+        stage ('Deploy Phase 1'){
+            parallel {
+                stage ('Keystores'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                        } // End script
+                    }
+                } // end stage
+                stage ('Aliases'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                        } // End script
+                    }
+                } // end stage
+                stage ('Caches'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                        } // End script
+                    }
+                } // end stage
+                stage ('Kvms'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                        } // End script
+                    }
+                } // end stage
+                stage ('Shared Flow'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                            }
+                        }
+                } // end stage
+                stage ('Target Servers'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                            }
+                        }
+                } // end stage
+            } // end parallel
+        } // end stage
+
+        stage ('Deploy Phase 2'){
+            parallel {
+                stage ('References'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                            }
+                        }
+                } // end stage
+                stage ('Proxy'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                            }
+                        }
+                } // end stage
+            } // end parallel
+        } // end stage
+
+        stage ('Deploy Phase 3'){
+            parallel {
+                stage ('Developers'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                            }
+                        }
+                } // end stage
+                stage ('Flow Hooks'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                            }
+                        }
+                } // end stage
+                stage ('Products'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                            }
+                        }
+                } // end stage
+            } // end parallel
+        } // end stage
+
+        stage ('Deploy Phase 4'){
+            parallel {
+                stage ('Apps'){
+                    steps {
+                        script {
+                            log.info("Simulation only")
+                            }
+                        }
+                } // end stage
+            } // end parallel
+        } // end stage
+
+    } // End stages
+
+    post {
+        failure {
+            script {
+                log.info("Simulation only")
+                }
+            } // End script
+        } // End failure
+        success {
+            script {
+                log.info("Simulation only")
+            } // End script
+        } // End success
+        cleanup {deleteDir()}// Clean workspace
+
+     } // End post
+
+} // End pipeline
