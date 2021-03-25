@@ -14,7 +14,8 @@ pipeline{
         stage('Create RFC') {steps {script {echo("dummy stage")}}}
         stage ('Deploy Phase 1'){
             parallel {
-                stage ('Keystores'){steps {script {echo("dummy stage")}}}
+                stage ('Keystores'){steps {script {throw new Exception("Throw to stop pipeline")
+                echo("dummy stage")}}}
                 stage ('Aliases'){steps {script {echo("dummy stage")}}}
                 stage ('Caches'){steps {script {echo("dummy stage")}}}
                 stage ('Kvms'){steps {script {echo("dummy stage")}}}
@@ -30,7 +31,7 @@ pipeline{
         } // end stage
         stage ('Deploy Phase 3'){
             parallel {
-                xstage ('Developers'){steps {script {echo("dummy stage")}}}
+                stage ('Developers'){steps {script {echo("dummy stage")}}}
                 stage ('Flow Hooks'){steps {script {echo("dummy stage")}}}
                 stage ('Products'){steps {script {echo("dummy stage")}}}
             } // end parallel
