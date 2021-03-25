@@ -30,7 +30,7 @@ pipeline{
         } // end stage
         stage ('Deploy Phase 3'){
             parallel {
-                stage ('Developers'){steps {script {echo("dummy stage")}}}
+                xstage ('Developers'){steps {script {echo("dummy stage")}}}
                 stage ('Flow Hooks'){steps {script {echo("dummy stage")}}}
                 stage ('Products'){steps {script {echo("dummy stage")}}}
             } // end parallel
