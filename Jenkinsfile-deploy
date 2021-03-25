@@ -8,6 +8,7 @@ pipeline{
             steps {
                 script {
                     echo("Camunda Process Instance: $WF_PROCESS_INSTANCE_ID")
+                    currentBuild.description =  "[RUNNING] processInstanceId:${WF_PROCESS_INSTANCE_ID}"
                 } // End script
             } // End steps
         } // End stage
@@ -53,12 +54,12 @@ pipeline{
         }
         failure {
             script {
-                echo("Fail Simulation")
+                echo("Fail")
             } // End script
         } // End failure
         success {
             script {
-                echo("Success Simulation")
+                echo("Success")
             } // End script
         } // End success
         cleanup {deleteDir()}// Clean workspace
