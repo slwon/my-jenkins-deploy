@@ -4,111 +4,40 @@ pipeline{
        string(name: 'WF_PROCESS_INSTANCE_ID', defaultValue: '', description: 'Camunda Process Instance ID')
    } // End parameters
     stages {
-        stage('Create RFC') {
+        stage('Debug Info') {
             steps {
                 script {
-                    echo("Simulation only $WF_PROCESS_INSTANCE_ID")
+                    echo("Camunda Process Instance: $WF_PROCESS_INSTANCE_ID")
                 } // End script
             } // End steps
         } // End stage
+        stage('Create RFC') {steps {script {echo("dummy stage")}}}
         stage ('Deploy Phase 1'){
             parallel {
-                stage ('Keystores'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                        } // End script
-                    }
-                } // end stage
-                stage ('Aliases'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                        } // End script
-                    }
-                } // end stage
-                stage ('Caches'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                        } // End script
-                    }
-                } // end stage
-                stage ('Kvms'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                        } // End script
-                    }
-                } // end stage
-                stage ('Shared Flow'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                            }
-                        }
-                } // end stage
-                stage ('Target Servers'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                            }
-                        }
-                } // end stage
+                stage ('Keystores'){steps {script {echo("dummy stage")}}}
+                stage ('Aliases'){steps {script {echo("dummy stage")}}}
+                stage ('Caches'){steps {script {echo("dummy stage")}}}
+                stage ('Kvms'){steps {script {echo("dummy stage")}}}
+                stage ('Shared Flow'){steps {script {echo("dummy stage")}}}
+                stage ('Target Servers'){steps {script {echo("dummy stage")}}}
             } // end parallel
         } // end stage
         stage ('Deploy Phase 2'){
             parallel {
-                stage ('References'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                            }
-                        }
-                } // end stage
-                stage ('Proxy'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                            }
-                        }
-                } // end stage
+                stage ('References'){steps {script {echo("dummy stage")}}}
+                stage ('Proxy'){steps {script {echo("dummy stage")}}}
             } // end parallel
         } // end stage
         stage ('Deploy Phase 3'){
             parallel {
-                stage ('Developers'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                            }
-                        }
-                } // end stage
-                stage ('Flow Hooks'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                            }
-                        }
-                } // end stage
-                stage ('Products'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                            }
-                        }
-                } // end stage
+                stage ('Developers'){steps {script {echo("dummy stage")}}}
+                stage ('Flow Hooks'){steps {script {echo("dummy stage")}}}
+                stage ('Products'){steps {script {echo("dummy stage")}}}
             } // end parallel
         } // end stage
         stage ('Deploy Phase 4'){
             parallel {
-                stage ('Apps'){
-                    steps {
-                        script {
-                            echo("Simulation only")
-                            }
-                        }
-                } // end stage
+                stage ('Apps'){steps {script {echo("dummy stage")}}}
             } // end parallel
         } // end stage
     } // End stages
