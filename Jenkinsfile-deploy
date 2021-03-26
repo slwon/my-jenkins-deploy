@@ -60,6 +60,7 @@ pipeline{
                                 responseHandle: 'NONE',
                                 url: "${WORKFLOW_URL}/engine-rest/message",
                                 ignoreSslErrors: true,
+                                contentType: APPLICATION_JSON,
                                 requestBody: "{\"messageName\": \"deploymentJobCompleted\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": true}"
                 echo "${response}"
             }
