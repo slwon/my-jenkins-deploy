@@ -74,9 +74,11 @@ pipeline{
             } // End script
         } // End success
         cleanup {
-            currentBuild.displayName = "#${env.BUILD_NUMBER}"
-            currentBuild.description =  "[${currentBuild.currentResult}] processInstanceId:${WF_PROCESS_INSTANCE_ID}"
-            deleteDir()
+            script {
+                currentBuild.displayName = "#${env.BUILD_NUMBER}"
+                currentBuild.description =  "[${currentBuild.currentResult}] processInstanceId:${WF_PROCESS_INSTANCE_ID}"
+                deleteDir()
+            }
         }// Clean workspace
      } // End post
 } // End pipeline
