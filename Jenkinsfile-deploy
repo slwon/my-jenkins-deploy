@@ -23,7 +23,7 @@ pipeline{
                         }
                     }
                 }
-                stage ('Aliases'){steps {script {echo("dummy stage")}}}
+                stage ('Aliases'){steps {script {echo("dummy stage");sleep(5)}}}
                 stage ('Caches'){steps {script {echo("dummy stage")}}}
                 stage ('Kvms'){steps {script {echo("dummy stage")}}}
                 stage ('Shared Flow'){steps {script {echo("dummy stage")}}}
@@ -50,7 +50,7 @@ pipeline{
         } // end stage
     } // End stages
     post {
-        // 'always' runs first before 'success' or 'failure' or 'cleanup'
+        // 'always' runs before 'success' or 'failure' or 'cleanup'
         always {
             script{
                 def WORKFLOW_URL = 'https://34.78.150.62:8443'
