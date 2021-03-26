@@ -18,13 +18,12 @@ pipeline{
                 stage ('Keystores'){
                     steps {
                         script {
-                            sleep(5)
                             echo("dummy stage")
                             // throw new Exception("Simulate pipeline failure")
                         }
                     }
                 }
-                stage ('Aliases'){steps {script {echo("dummy stage")}}}
+                stage ('Aliases'){steps {script {echo("dummy stage");sleep(5)}}}
                 stage ('Caches'){steps {script {echo("dummy stage")}}}
                 stage ('Kvms'){steps {script {echo("dummy stage")}}}
                 stage ('Shared Flow'){steps {script {echo("dummy stage")}}}
@@ -33,8 +32,8 @@ pipeline{
         } // end stage
         stage ('Deploy Phase 2'){
             parallel {
-                stage ('References'){steps {script {echo("dummy stage");sleep(5)}}}
-                stage ('Proxy'){steps {script {echo("dummy stage")}}}
+                stage ('References'){steps {script {echo("dummy stage")}}}
+                stage ('Proxy'){steps {script {echo("dummy stage");sleep(5)}}}
             } // end parallel
         } // end stage
         stage ('Deploy Phase 3'){
