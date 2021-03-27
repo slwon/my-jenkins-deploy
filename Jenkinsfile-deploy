@@ -59,7 +59,9 @@ pipeline{
         // Sequence of execution: always, changed, fixed, regression, aborted, failure, success, unstable, unsuccessful, and cleanup
         always {
             script{
-                workflow.deploymentComplete()
+                workflow.deploymentComplete(processInstanceId: env.WH_GIT_PUSHER_EMAIL,
+                                            deploymentStatus: "${currentBuild.currentResult}"
+                                           )
                 def requestBody = """\
                                       {
                                         "messageName": "deploymentComplete",
