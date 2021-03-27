@@ -38,6 +38,7 @@ private def callRestApi(Map config) {
     def _path               = config.path ?: ''
     def _requestBody        = config.requestBody ?: ''
 
+    log.info("Request:\n ${{_requestBody}}")
     def _host = 'https://34.78.150.62:8443'
     def _response = httpRequest authentication: 'jenkins-camunda',
                     httpMode: "${_method}",
@@ -45,7 +46,7 @@ private def callRestApi(Map config) {
                     ignoreSslErrors: true,
                     contentType: "APPLICATION_JSON",
                     requestBody: "${_requestBody}",
-                    validResponseCodes : '100:199',
+                    validResponseCodes : '200:299',
                     consoleLogResponseBody: true
     return _response
 }

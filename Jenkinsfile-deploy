@@ -58,7 +58,7 @@ pipeline{
         // Sequence of execution: always, changed, fixed, regression, aborted, failure, success, unstable, unsuccessful, and cleanup
         always {
             script{
-echo 'hello'
+                echo ''
             }
         }
         success {
@@ -74,7 +74,7 @@ echo 'hello'
         cleanup {
             script {
                 currentBuild.displayName = "#${env.BUILD_NUMBER}"
-                currentBuild.description =  "[DEPLOYMENT ${currentBuild.currentResult}] ${WF_PROCESS_INSTANCE_ID}"
+                currentBuild.description =  "[${currentBuild.currentResult}] ${WF_PROCESS_INSTANCE_ID}"
                 deleteDir()
             }
         }// Clean workspace
