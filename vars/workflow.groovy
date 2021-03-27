@@ -8,6 +8,7 @@ def deploymentComplete(Map config) {
     String _processInstanceId               = config.processInstanceId ?: 'undefined'
     String _deploymentStatus                = config.deploymentStatus ?: 'undefined'
 
+    log.info("Sending message event to workflow engine...")
     def requestBody = """\
                             {
                             "messageName": "deploymentComplete",
@@ -17,8 +18,6 @@ def deploymentComplete(Map config) {
                                 "deploymentStatus" : {"value" : "${_deploymentStatus}", "type": "String"}
                                 }
                             }""".stripIndent()
-
-    echo "Sending message event to workflow engine..."
     this.callRestApi(
         method: "POST",
         path:"/engine-rest/message",
@@ -31,11 +30,11 @@ def deploymentComplete(Map config) {
 // ---------------------------------------------------
 
 private def callRestApi(Map config) {
-    def _logRequestResponseBodyFlag = true
     def _method                     = config.method ?: 'GET' // Default
     def _path                       = config.path ?: ''
     def _requestBody                = config.requestBody ?: ''
 
+    def _logRequestResponseBodyFlag = true
     if (_logRequestResponseBodyFlag){
         log.info("Request:\n ${_requestBody}")
     }
