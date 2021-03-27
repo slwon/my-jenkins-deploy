@@ -50,7 +50,7 @@ pipeline{
         } // end stage
     } // End stages
     post {
-        // 'always' runs before 'success' or 'failure' or 'cleanup'
+        // Sequence of execution: always, changed, fixed, regression, aborted, failure, success, unstable, unsuccessful, and cleanup
         always {
             script{
                 def requestBody = """\
@@ -66,7 +66,6 @@ pipeline{
                                 url: "${WORKFLOW_HOST}/engine-rest/message",
                                 ignoreSslErrors: true,
                                 contentType: "APPLICATION_JSON",
-                                // requestBody: "{\"messageName\": \"deploymentComplete\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": true}",
                                 requestBody: "${requestBody}",
                                 responseHandle: 'NONE',
                                 validResponseCodes : '200,204',
