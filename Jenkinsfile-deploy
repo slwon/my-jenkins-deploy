@@ -65,7 +65,7 @@ pipeline{
                                         "processInstanceId": "${WF_PROCESS_INSTANCE_ID}",
                                         "resultEnabled": true,
                                         "processVariables" : {
-                                            "deploymentStatus" : {"value" : "dummy", "type": "String"}
+                                            "deploymentStatus" : {"value" : "${currentBuild.currentResult}", "type": "String"}
                                          }
                                       }""".stripIndent()
                 echo "Sending Message Event to Workflow Engine\n Request:\n ${requestBody}"
