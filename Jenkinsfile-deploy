@@ -55,9 +55,9 @@ pipeline{
             script{
                 def requestBody = """\
                                       {
-                                        \"messageName\": \"deploymentComplete\",
-                                        \"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\",
-                                        \"resultEnabled\": true
+                                        "messageName": "deploymentComplete",
+                                        "processInstanceId": "${WF_PROCESS_INSTANCE_ID}",
+                                        "resultEnabled": true,
                                          "processVariables" : {
                                              "deploymentStatus" : {"value" : "dummy", "type": "String"}
                                          }
