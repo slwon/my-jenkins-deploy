@@ -5,4 +5,25 @@ def deploymentComplete(Map config) {
     String _deploymentStatus                = config.deploymentStatus ?: 'undefined'
     echo "--- ${_processInstanceId}"
     echo "--- ${_deploymentStatus}"
+
+    def requestBody = """\
+                            {
+                            "messageName": "deploymentComplete",
+                            "processInstanceId": "${WF_PROCESS_INSTANCE_ID}",
+                            "resultEnabled": true,
+                            "processVariables" : {
+                                "deploymentStatus" : {"value" : "${currentBuild.currentResult}", "type": "String"}
+                                }
+                            }""".stripIndent()
+    echo "Sending Message Event to Workflow Engine\n Request:\n ${requestBody}"
+    def WORKFLOW_HOST = 'https://34.78.150.62:8443'
+    def response =  httpRequest authentication: 'jenkins-camunda',
+                    httpMode: 'POST',
+                    url: "${WORKFLOW_HOST}/engine-rest/message",
+                    ignoreSslErrors: true,
+                    contentType: "APPLICATION_JSON",
+                    requestBody: "${requestBody}",
+                    responseHandle: 'NONE',
+                    validResponseCodes : '200,204',
+                    consoleLogResponseBody: true
 }
