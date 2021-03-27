@@ -21,7 +21,7 @@ def deploymentComplete(Map config) {
     echo "Sending message event to workflow engine..."
     this.callRestApi(
         method: "POST",
-        path:"/engine-rest/message"
+        path:"/engine-rest/message",
         requestBody: "${requestBody}"
     )
 
