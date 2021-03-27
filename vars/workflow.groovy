@@ -32,7 +32,7 @@ def deploymentComplete(Map config) {
 // Private Methods
 // ---------------------------------------------------
 
-private void callRestApi(Map config) {
+private def callRestApi(Map config) {
 
     def _method             = config.method ?: 'GET'
     def _path               = config.path ?: ''
@@ -45,7 +45,7 @@ private void callRestApi(Map config) {
                     ignoreSslErrors: true,
                     contentType: "APPLICATION_JSON",
                     requestBody: "${_requestBody}",
-                    responseHandle: 'NONE',
                     validResponseCodes : '200:299',
                     consoleLogResponseBody: true
+    return _response
 }
