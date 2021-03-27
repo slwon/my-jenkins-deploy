@@ -45,7 +45,7 @@ private def callRestApi(Map config) {
                     ignoreSslErrors: true,
                     contentType: "APPLICATION_JSON",
                     requestBody: "${_requestBody}",
-                    validResponseCodes : '200:299',
+                    validResponseCodes : '100:199',
                     consoleLogResponseBody: true
     return _response
 }
