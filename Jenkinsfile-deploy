@@ -57,15 +57,15 @@ pipeline{
                 def requestBody = """\
                                       {\"messageName\": \"deploymentComplete\",
                                       \"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\",
-                                      \"resultEnabled\": true}
-                                  """.stripIndent()
+                                      \"resultEnabled\": true}""".stripIndent()
                 echo "Request:\n ${requestBody}"
                 def response =  httpRequest authentication: 'jenkins-camunda',
                                 httpMode: 'POST',
                                 url: "${WORKFLOW_HOST}/engine-rest/message",
                                 ignoreSslErrors: true,
                                 contentType: "APPLICATION_JSON",
-                                requestBody: "{\"messageName\": \"deploymentComplete\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": true}",
+                                // requestBody: "{\"messageName\": \"deploymentComplete\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": true}",
+                                requestBody: "${requestBody}"
                                 responseHandle: 'NONE',
                                 validResponseCodes : '200,204',
                                 consoleLogResponseBody: true
