@@ -33,12 +33,15 @@ def deploymentComplete(Map config) {
 // ---------------------------------------------------
 
 private def callRestApi(Map config) {
+    def _logRequestResponseBodyFlag = true
+    def _method                     = config.method ?: 'GET' // Default
+    def _path                       = config.path ?: ''
+    def _requestBody                = config.requestBody ?: ''
 
-    def _method             = config.method ?: 'GET' // Default
-    def _path               = config.path ?: ''
-    def _requestBody        = config.requestBody ?: ''
+    if (_logRequestResponseBodyFlag){
+        log.info("Request:\n ${_requestBody}")
+    }
 
-    log.info("Request:\n ${_requestBody}")
     def _host = 'https://34.78.150.62:8443'
     def _response = httpRequest authentication: 'jenkins-camunda',
                     httpMode: "${_method}",
@@ -47,6 +50,6 @@ private def callRestApi(Map config) {
                     contentType: "APPLICATION_JSON",
                     requestBody: "${_requestBody}",
                     validResponseCodes : '200:299',
-                    consoleLogResponseBody: true
+                    consoleLogResponseBody: _logRequestResponseBodyFlag
     return _response
 }
