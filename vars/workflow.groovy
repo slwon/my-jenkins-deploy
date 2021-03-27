@@ -9,10 +9,10 @@ def deploymentComplete(Map config) {
     def requestBody = """\
                             {
                             "messageName": "deploymentComplete",
-                            "processInstanceId": "${WF_PROCESS_INSTANCE_ID}",
+                            "processInstanceId": "${_processInstanceId}",
                             "resultEnabled": true,
                             "processVariables" : {
-                                "deploymentStatus" : {"value" : "${currentBuild.currentResult}", "type": "String"}
+                                "deploymentStatus" : {"value" : "${_deploymentStatus}", "type": "String"}
                                 }
                             }""".stripIndent()
     echo "Sending Message Event to Workflow Engine\n Request:\n ${requestBody}"
