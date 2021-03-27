@@ -8,8 +8,9 @@ pipeline{
             steps {
                 library identifier: "my-jenkins-deploy@${env.GIT_BRANCH}",
                         retriever: legacySCM([$class: 'GitSCM',
-                                              branches: [[name: "${env.GIT_BRANCH}"]]
+                                              branches: [[name: "${env.GIT_BRANCH}"]],
                                               // userRemoteConfigs: [[credentialsId: 'jenkins-git-pac', url: "${env.GIT_URL}"]]
+                                              userRemoteConfigs: [[url: "${env.GIT_URL}"]]
                                              ])
                 script {
                     echo("Camunda Process Instance: $WF_PROCESS_INSTANCE_ID")
