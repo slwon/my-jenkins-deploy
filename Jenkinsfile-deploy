@@ -18,40 +18,40 @@ pipeline{
                 } // End script
             } // End steps
         } // End stage
-        stage('Create RFC') {steps {script {echo("dummy stage")}}}
+        stage('Create RFC') {steps {script {echo("Running simulation...")}}}
         stage ('Deploy Phase 1'){
             parallel {
                 stage ('Keystores'){
                     steps {
                         script {
-                            echo("dummy stage")
+                            echo("Running simulation...")
                             throw new Exception("Simulate pipeline failure")
                         }
                     }
                 }
-                stage ('Aliases'){steps {script {echo("dummy stage");sleep(5)}}}
-                stage ('Caches'){steps {script {echo("dummy stage")}}}
-                stage ('Kvms'){steps {script {echo("dummy stage")}}}
-                stage ('Shared Flow'){steps {script {echo("dummy stage")}}}
-                stage ('Target Servers'){steps {script {echo("dummy stage")}}}
+                stage ('Aliases'){steps {script {echo("Running simulation...");sleep(5)}}}
+                stage ('Caches'){steps {script {echo("Running simulation...")}}}
+                stage ('Kvms'){steps {script {echo("Running simulation...")}}}
+                stage ('Shared Flow'){steps {script {echo("Running simulation...")}}}
+                stage ('Target Servers'){steps {script {echo("Running simulation...")}}}
             } // end parallel
         } // end stage
         stage ('Deploy Phase 2'){
             parallel {
-                stage ('References'){steps {script {echo("dummy stage")}}}
-                stage ('Proxy'){steps {script {echo("dummy stage");sleep(5)}}}
+                stage ('References'){steps {script {echo("Running simulation...")}}}
+                stage ('Proxy'){steps {script {echo("Running simulation...");sleep(5)}}}
             } // end parallel
         } // end stage
         stage ('Deploy Phase 3'){
             parallel {
-                stage ('Developers'){steps {script {echo("dummy stage");sleep(5)}}}
-                stage ('Flow Hooks'){steps {script {echo("dummy stage")}}}
-                stage ('Products'){steps {script {echo("dummy stage")}}}
+                stage ('Developers'){steps {script {echo("Running simulation...");sleep(5)}}}
+                stage ('Flow Hooks'){steps {script {echo("Running simulation...")}}}
+                stage ('Products'){steps {script {echo("Running simulation...")}}}
             } // end parallel
         } // end stage
         stage ('Deploy Phase 4'){
             parallel {
-                stage ('Apps'){steps {script {echo("dummy stage");sleep(5)}}}
+                stage ('Apps'){steps {script {echo("Running simulation...");sleep(5)}}}
             } // end parallel
         } // end stage
     } // End stages
