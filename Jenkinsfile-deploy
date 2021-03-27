@@ -53,15 +53,15 @@ pipeline{
         // 'always' runs before 'success' or 'failure' or 'cleanup'
         always {
             script{
-                def WORKFLOW_URL = 'https://34.78.150.62:8443'
+                def WORKFLOW_HOST = 'https://34.78.150.62:8443'
                 def response =  httpRequest authentication: 'jenkins-camunda',
                                 consoleLogResponseBody: true,
                                 httpMode: 'POST',
                                 responseHandle: 'NONE',
-                                url: "${WORKFLOW_URL}/engine-rest/message",
+                                url: "${WORKFLOW_HOST}/engine-rest/message",
                                 ignoreSslErrors: true,
                                 contentType: "APPLICATION_JSON",
-                                requestBody: "{\"messageName\": \"deploymentJobCompleted\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": true}"
+                                requestBody: "{\"messageName\": \"deploymentComplete\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": true}"
                 echo "${response}"
             }
         }
