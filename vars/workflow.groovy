@@ -1,10 +1,12 @@
 #!groovy​
 
+// ---------------------------------------------------
+// Public Methods
+// ---------------------------------------------------
+
 def deploymentComplete(Map config) {
     String _processInstanceId               = config.processInstanceId ?: 'undefined'
     String _deploymentStatus                = config.deploymentStatus ?: 'undefined'
-    echo "--- ${_processInstanceId}"
-    echo "--- ${_deploymentStatus}"
 
     def requestBody = """\
                             {
@@ -15,15 +17,35 @@ def deploymentComplete(Map config) {
                                 "deploymentStatus" : {"value" : "${_deploymentStatus}", "type": "String"}
                                 }
                             }""".stripIndent()
-    echo "Sending Message Event to Workflow Engine\n Request:\n ${requestBody}"
-    def WORKFLOW_HOST = 'https://34.78.150.62:8443'
-    def response =  httpRequest authentication: 'jenkins-camunda',
-                    httpMode: 'POST',
-                    url: "${WORKFLOW_HOST}/engine-rest/message",
+
+    echo "Sending message event to workflow engine..."
+    this.callRestApi(
+        method: "POST",
+        path:"/engine-rest/message"
+        requestBody: "${requestBody}"
+    )
+
+
+}
+
+// ---------------------------------------------------
+// Private Methods
+// ---------------------------------------------------
+
+private void callRestApi(Map config) {
+
+    def _method             = config.method ?: 'GET'
+    def _path               = config.path ?: ''
+    def _requestBody        = config.requestBody ?: ''
+
+    def _host = 'https://34.78.150.62:8443'
+    def _response = httpRequest authentication: 'jenkins-camunda',
+                    httpMode: "${_method}",
+                    url: "${_host}${_path}",
                     ignoreSslErrors: true,
                     contentType: "APPLICATION_JSON",
-                    requestBody: "${requestBody}",
+                    requestBody: "${_requestBody}",
                     responseHandle: 'NONE',
-                    validResponseCodes : '200,204',
+                    validResponseCodes : '200:299',
                     consoleLogResponseBody: true
 }
