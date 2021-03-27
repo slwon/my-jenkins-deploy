@@ -24,8 +24,6 @@ def deploymentComplete(Map config) {
         path:"/engine-rest/message",
         requestBody: "${requestBody}"
     )
-
-
 }
 
 // ---------------------------------------------------
