@@ -53,14 +53,14 @@ pipeline{
         // 'always' runs before 'success' or 'failure' or 'cleanup'
         always {
             script{
-                def WORKFLOW_HOST = 'https://34.78.150.62:8443'
                 def requestBody = """\
                                       {
                                         \"messageName\": \"deploymentComplete\",
                                         \"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\",
                                         \"resultEnabled\": true
                                       }""".stripIndent()
-                echo "Request:\n ${requestBody}"
+                echo "Sending Message Event to Workflow Engine\n Request:\n ${requestBody}"
+                def WORKFLOW_HOST = 'https://34.78.150.62:8443'
                 def response =  httpRequest authentication: 'jenkins-camunda',
                                 httpMode: 'POST',
                                 url: "${WORKFLOW_HOST}/engine-rest/message",
