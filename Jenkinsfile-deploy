@@ -55,14 +55,15 @@ pipeline{
             script{
                 def WORKFLOW_HOST = 'https://34.78.150.62:8443'
                 def response =  httpRequest authentication: 'jenkins-camunda',
-                                consoleLogResponseBody: true,
                                 httpMode: 'POST',
-                                responseHandle: 'NONE',
                                 url: "${WORKFLOW_HOST}/engine-rest/message",
                                 ignoreSslErrors: true,
                                 contentType: "APPLICATION_JSON",
-                                requestBody: "{\"messageName\": \"deploymentComplete\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": true}"
-                echo "${response}"
+                                requestBody: "{\"messageName\": \"deploymentComplete\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": true}",
+                                responseHandle: 'STRING',
+                                validResponseCodes : '200,204',
+                                consoleLogResponseBody: true
+                echo "--------${response}"
             }
         }
         failure {
