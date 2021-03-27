@@ -4,8 +4,13 @@ pipeline{
        string(name: 'WF_PROCESS_INSTANCE_ID', defaultValue: '', description: 'Camunda Process Instance ID')
    } // End parameters
     stages {
-        stage('Debug Info') {
+        stage('Preparation') {
             steps {
+                library identifier: "my-jenkins-deploy@${env.GIT_BRANCH}",
+                        retriever: legacySCM([$class: 'GitSCM',
+                                              branches: [[name: "${env.GIT_BRANCH}"]]
+                                              // userRemoteConfigs: [[credentialsId: 'jenkins-git-pac', url: "${env.GIT_URL}"]]
+                                             ])
                 script {
                     echo("Camunda Process Instance: $WF_PROCESS_INSTANCE_ID")
                     currentBuild.description =  "${WF_PROCESS_INSTANCE_ID}"
@@ -58,8 +63,8 @@ pipeline{
                                         "messageName": "deploymentComplete",
                                         "processInstanceId": "${WF_PROCESS_INSTANCE_ID}",
                                         "resultEnabled": true,
-                                         "processVariables" : {
-                                             "deploymentStatus" : {"value" : "dummy", "type": "String"}
+                                        "processVariables" : {
+                                            "deploymentStatus" : {"value" : "dummy", "type": "String"}
                                          }
                                       }""".stripIndent()
                 echo "Sending Message Event to Workflow Engine\n Request:\n ${requestBody}"
