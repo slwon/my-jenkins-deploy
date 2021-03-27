@@ -59,19 +59,17 @@ pipeline{
         // Sequence of execution: always, changed, fixed, regression, aborted, failure, success, unstable, unsuccessful, and cleanup
         always {
             script{
-                workflow.deploymentComplete(processInstanceId: "${WF_PROCESS_INSTANCE_ID}",
-                                            deploymentStatus: "${currentBuild.currentResult}"
-                                           )
+echo 'hello'
             }
         }
-        failure {
-            script {
-                echo("Fail")
-            } // End script
-        } // End failure
         success {
             script {
-                echo("Success")
+                workflow.deploymentComplete(deploymentStatus: "success", processInstanceId: "${WF_PROCESS_INSTANCE_ID}")
+            } // End script
+        } // End failure
+        failure {
+            script {
+                workflow.deploymentComplete(deploymentStatus: "failed", processInstanceId: "${WF_PROCESS_INSTANCE_ID}")
             } // End script
         } // End success
         cleanup {
