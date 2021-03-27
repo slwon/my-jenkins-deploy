@@ -8,7 +8,7 @@ pipeline{
             steps {
                 script {
                     echo("Camunda Process Instance: $WF_PROCESS_INSTANCE_ID")
-                    currentBuild.description =  "processInstanceId:${WF_PROCESS_INSTANCE_ID}"
+                    currentBuild.description =  "${WF_PROCESS_INSTANCE_ID}"
                 } // End script
             } // End steps
         } // End stage
@@ -86,7 +86,7 @@ pipeline{
         cleanup {
             script {
                 currentBuild.displayName = "#${env.BUILD_NUMBER}"
-                currentBuild.description =  "[DEPLOYMENT ${currentBuild.currentResult}] processInstanceId:${WF_PROCESS_INSTANCE_ID}"
+                currentBuild.description =  "[DEPLOYMENT ${currentBuild.currentResult}] ${WF_PROCESS_INSTANCE_ID}"
                 deleteDir()
             }
         }// Clean workspace
