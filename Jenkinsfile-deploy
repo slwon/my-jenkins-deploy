@@ -59,6 +59,7 @@ pipeline{
         // Sequence of execution: always, changed, fixed, regression, aborted, failure, success, unstable, unsuccessful, and cleanup
         always {
             script{
+                workflow.deploymentComplete()
                 def requestBody = """\
                                       {
                                         "messageName": "deploymentComplete",
