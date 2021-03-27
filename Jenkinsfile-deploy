@@ -59,7 +59,7 @@ pipeline{
                                 url: "${WORKFLOW_HOST}/engine-rest/message",
                                 ignoreSslErrors: true,
                                 contentType: "APPLICATION_JSON",
-                                requestBody: "{\"messageName\": \"deploymentComplete\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": true}",
+                                requestBody: "{\"messageName\": \"deploymentComplete\",\"processInstanceId\": \"${WF_PROCESS_INSTANCE_ID}\" ,\"resultEnabled\": false}",
                                 responseHandle: 'STRING',
                                 validResponseCodes : '200,204',
                                 consoleLogResponseBody: true
