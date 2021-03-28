@@ -5,13 +5,14 @@
 // ---------------------------------------------------
 
 def deploymentComplete(Map config) {
-    String _processInstanceId               = config.processInstanceId ?: 'undefined'
-    String _deploymentStatus                = config.deploymentStatus ?: 'undefined'
+    String _processInstanceId           = config.processInstanceId ?: 'undefined'
+    String _deploymentStatus            = config.deploymentStatus ?: 'undefined'
+    String _messageName = (_deploymentStatus == "success") ? "deploymentSuccess" : "deploymentFailed"
 
     log.info("Sending message event to workflow engine...")
     def requestBody = """\
                             {
-                            "messageName": "deploymentJobComplete",
+                            "messageName": "${_messageName}",
                             "processInstanceId": "${_processInstanceId}",
                             "resultEnabled": true,
                             "processVariables" : {
