@@ -7,7 +7,7 @@
 def deploymentComplete(Map config) {
     String _processInstanceId           = config.processInstanceId ?: 'undefined'
     String _deploymentStatus            = config.deploymentStatus ?: 'undefined'
-    String _messageName = (_deploymentStatus == "success") ? "deploymentSuccess" : "deploymentFailed"
+    String _messageName = (_deploymentStatus == "success") ? "deploymentSuccess" : "deploymentFailed" // Message Event name of the bpm workflow
 
     log.info("Sending message event to workflow engine...")
     def requestBody = """\
