@@ -7,7 +7,8 @@
 def deploymentComplete(Map config) {
     String _processInstanceId           = config.processInstanceId ?: 'undefined'
     String _deploymentStatus            = config.deploymentStatus ?: 'undefined'
-    String _deploymentMessage           = "Jenkins ${currentBuild.projectName}: ${env.RUN_DISPLAY_URL}"
+    String _deploymentMessage           = "Jenkins '${currentBuild.projectName}' job ${_deploymentStatus}"
+    String _deploymentJob               = "${env.RUN_DISPLAY_URL}"
     String _messageName = (_deploymentStatus == "success") ? "deploymentSuccess" : "deploymentFailed" // Message Event name of the bpm workflow
 
     log.info("Sending message event to workflow engine...")
@@ -18,7 +19,8 @@ def deploymentComplete(Map config) {
                             "resultEnabled": true,
                             "processVariables" : {
                                 "deploymentStatus" : {"value" : "${_deploymentStatus}", "type": "String"},
-                                "deploymentMessage" : {"value" : "${_deploymentMessage}", "type": "String"}
+                                "deploymentMessage" : {"value" : "${_deploymentMessage}", "type": "String"},
+                                "deploymentJob" : {"value" : "${_deploymentJob}", "type": "String"}
                                 }
                             }""".stripIndent()
     this.callRestApi(
