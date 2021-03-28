@@ -63,12 +63,12 @@ pipeline{
         }
         success {
             script {
-                workflow.deploymentComplete(deploymentStatus: "success", deploymentMessage: "Jenkins ${currentBuild.projectName}: aa", processInstanceId: "${processInstanceId}")
+                workflow.deploymentComplete(deploymentStatus: "success", processInstanceId: "${processInstanceId}")
             } // End script
         } // End failure
         failure {
             script {
-                workflow.deploymentComplete(deploymentStatus: "failed", deploymentMessage: "Jenkins ${currentBuild.projectName}: bb", processInstanceId: "${processInstanceId}")
+                workflow.deploymentComplete(deploymentStatus: "failed", processInstanceId: "${processInstanceId}")
             } // End script
         } // End success
         cleanup {

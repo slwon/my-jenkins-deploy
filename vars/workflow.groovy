@@ -7,7 +7,7 @@
 def deploymentComplete(Map config) {
     String _processInstanceId           = config.processInstanceId ?: 'undefined'
     String _deploymentStatus            = config.deploymentStatus ?: 'undefined'
-    String _deploymentMessage           = config.deploymentMessage ?: ''
+    String _deploymentMessage           = "Jenkins ${currentBuild.projectName}: ${env.RUN_DISPLAY_URL}"
     String _messageName = (_deploymentStatus == "success") ? "deploymentSuccess" : "deploymentFailed" // Message Event name of the bpm workflow
 
     log.info("Sending message event to workflow engine...")
