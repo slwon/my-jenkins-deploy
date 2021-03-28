@@ -7,6 +7,7 @@
 def deploymentComplete(Map config) {
     String _processInstanceId           = config.processInstanceId ?: 'undefined'
     String _deploymentStatus            = config.deploymentStatus ?: 'undefined'
+    String _deploymentMessage           = config.deploymentMessage ?: ''
     String _messageName = (_deploymentStatus == "success") ? "deploymentSuccess" : "deploymentFailed" // Message Event name of the bpm workflow
 
     log.info("Sending message event to workflow engine...")
@@ -17,6 +18,7 @@ def deploymentComplete(Map config) {
                             "resultEnabled": true,
                             "processVariables" : {
                                 "deploymentStatus" : {"value" : "${_deploymentStatus}", "type": "String"}
+                                "deploymentMessage" : {"value" : "${_deploymentMessage}", "type": "String"}
                                 }
                             }""".stripIndent()
     this.callRestApi(
