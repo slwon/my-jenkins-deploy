@@ -17,7 +17,7 @@ def deploymentComplete(Map config) {
                             "processInstanceId": "${_processInstanceId}",
                             "resultEnabled": true,
                             "processVariables" : {
-                                "deploymentStatus" : {"value" : "${_deploymentStatus}", "type": "String"}
+                                "deploymentStatus" : {"value" : "${_deploymentStatus}", "type": "String"},
                                 "deploymentMessage" : {"value" : "${_deploymentMessage}", "type": "String"}
                                 }
                             }""".stripIndent()
