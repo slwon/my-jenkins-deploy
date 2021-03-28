@@ -1,7 +1,7 @@
 pipeline{
    agent { node { label 'master' } }
    parameters {
-       string(name: 'WF_PROCESS_INSTANCE_ID', defaultValue: '', description: 'Camunda Process Instance ID')
+       string(name: 'processInstanceId', defaultValue: '', description: 'Camunda Process Instance ID')
    } // End parameters
     stages {
         stage('Preparation') {
@@ -12,8 +12,8 @@ pipeline{
                                               userRemoteConfigs: [[url: "${env.GIT_URL}"]]
                                              ])
                 script {
-                    echo("Camunda Process Instance: $WF_PROCESS_INSTANCE_ID")
-                    currentBuild.description =  "${WF_PROCESS_INSTANCE_ID}"
+                    echo("Camunda Process Instance: ${processInstanceId}")
+                    currentBuild.description =  "${processInstanceId}"
                 } // End script
             } // End steps
         } // End stage
@@ -63,18 +63,18 @@ pipeline{
         }
         success {
             script {
-                workflow.deploymentComplete(deploymentStatus: "success", processInstanceId: "${WF_PROCESS_INSTANCE_ID}")
+                workflow.deploymentComplete(deploymentStatus: "success", processInstanceId: "${processInstanceId}")
             } // End script
         } // End failure
         failure {
             script {
-                workflow.deploymentComplete(deploymentStatus: "failed", processInstanceId: "${WF_PROCESS_INSTANCE_ID}")
+                workflow.deploymentComplete(deploymentStatus: "failed", processInstanceId: "${processInstanceId}")
             } // End script
         } // End success
         cleanup {
             script {
                 currentBuild.displayName = "#${env.BUILD_NUMBER}"
-                currentBuild.description =  "[${currentBuild.currentResult}] ${WF_PROCESS_INSTANCE_ID}"
+                currentBuild.description =  "[${currentBuild.currentResult}] ${processInstanceId}"
                 deleteDir()
             }
         }// Clean workspace
