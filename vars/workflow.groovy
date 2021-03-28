@@ -11,7 +11,7 @@ def deploymentComplete(Map config) {
     log.info("Sending message event to workflow engine...")
     def requestBody = """\
                             {
-                            "messageName": "deploymentComplete",
+                            "messageName": "deploymentJobComplete",
                             "processInstanceId": "${_processInstanceId}",
                             "resultEnabled": true,
                             "processVariables" : {
