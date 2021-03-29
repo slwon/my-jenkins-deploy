@@ -14,6 +14,7 @@ pipeline{
                 script {
                     echo("Camunda Process Instance: ${processInstanceId}")
                     currentBuild.description =  "${processInstanceId}"
+                    delay = 10
                 } // End script
             } // End steps
         } // End stage
@@ -28,7 +29,7 @@ pipeline{
                         }
                     }
                 }
-                stage ('Aliases'){steps {script {echo("Running simulation...");sleep(5)}}}
+                stage ('Aliases'){steps {script {echo("Running simulation...");sleep(delay)}}}
                 stage ('Caches'){steps {script {echo("Running simulation...")}}}
                 stage ('Kvms'){steps {script {echo("Running simulation...")}}}
                 stage ('Shared Flow'){steps {script {echo("Running simulation...")}}}
@@ -38,19 +39,19 @@ pipeline{
         stage ('Deploy Phase 2'){
             parallel {
                 stage ('References'){steps {script {echo("Running simulation...")}}}
-                stage ('Proxy'){steps {script {echo("Running simulation...");sleep(5)}}}
+                stage ('Proxy'){steps {script {echo("Running simulation...");sleep(delay)}}}
             } // end parallel
         } // end stage
         stage ('Deploy Phase 3'){
             parallel {
-                stage ('Developers'){steps {script {echo("Running simulation...");sleep(5)}}}
+                stage ('Developers'){steps {script {echo("Running simulation...");sleep(delay)}}}
                 stage ('Flow Hooks'){steps {script {echo("Running simulation...")}}}
                 stage ('Products'){steps {script {echo("Running simulation...")}}}
             } // end parallel
         } // end stage
         stage ('Deploy Phase 4'){
             parallel {
-                stage ('Apps'){steps {script {echo("Running simulation...");sleep(5)}}}
+                stage ('Apps'){steps {script {echo("Running simulation...");sleep(delay)}}}
             } // end parallel
         } // end stage
     } // End stages
