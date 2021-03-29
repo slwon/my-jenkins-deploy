@@ -14,7 +14,7 @@ pipeline{
                 script {
                     echo("Camunda Process Instance: ${processInstanceId}")
                     currentBuild.description =  "${processInstanceId}"
-                    delay = 10
+                    delay = 5
                 } // End script
             } // End steps
         } // End stage
@@ -24,12 +24,16 @@ pipeline{
                 stage ('Keystores'){
                     steps {
                         script {
-                            echo("Running simulation...")
-                            throw new Exception("Mock a failure..")
+                            echo("Running simulation...");sleep(delay)
+
+                            // Randomly mock a failure
+                            if (Math.random() < 0.5) {
+                                throw new Exception("Randomly mock a failure..")
+                            }
                         }
                     }
                 }
-                stage ('Aliases'){steps {script {echo("Running simulation...");sleep(delay)}}}
+                stage ('Aliases'){steps {script {echo("Running simulation...")}}}
                 stage ('Caches'){steps {script {echo("Running simulation...")}}}
                 stage ('Kvms'){steps {script {echo("Running simulation...")}}}
                 stage ('Shared Flow'){steps {script {echo("Running simulation...")}}}
