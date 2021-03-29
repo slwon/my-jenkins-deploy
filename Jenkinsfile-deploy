@@ -24,7 +24,7 @@ pipeline{
                     steps {
                         script {
                             echo("Running simulation...")
-                            //throw new Exception("pipeline failure")
+                            throw new Exception("Mock a failure..")
                         }
                     }
                 }
