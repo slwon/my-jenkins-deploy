@@ -61,8 +61,7 @@ pipeline{
     } // End stages
     post {
         // Sequence of execution: always, changed, fixed, regression, aborted, failure, success, unstable, unsuccessful, and cleanup
-        always {
-        }
+        // always {}
         success {
             script {
                 workflow.deploymentComplete(deploymentStatus: "success", processInstanceId: "${processInstanceId}")
